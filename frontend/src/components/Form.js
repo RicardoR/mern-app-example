@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default function Form() {
   const [name, setName] = useState("");
@@ -9,8 +10,13 @@ export default function Form() {
   const register = async(e) => {
       e.preventDefault();
       const newEmployee = {name, surname, salary}
-      const response = await Axios.post('http://localhost:4000/api', newEmployee)
-      console.log(response)
+      const response = await Axios.post('http://localhost:4000/api', newEmployee);
+      Swal.fire({
+        icon: 'success',
+        title: response.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
   }
 
   return (
